@@ -1,15 +1,15 @@
 /* Global Variables */
-const baseURL = 'http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=';
-const apiKey = '&appid=fb0b977db06d43f54cf18ed919320565';
+const baseURL  = 'http://api.geonames.org/searchJSON?q=';
+const apiKey = '&maxRows=10&username=jdawg2021';
 
 // Event listener to add function to existing HTML DOM element
 // document.getElementById('generate').addEventListener('click', performAction);
 
 /* Function called by event listener */
 function performAction () {
-    let zip = document.getElementById('zip').value;
+    let city = document.getElementById('city').value;
     let mood = document.getElementById('feelings').value;
-    let apiUrl = baseURL + zip + apiKey;
+    let apiUrl = baseURL + city + apiKey;
     getWeatherData(apiUrl)
     .then(function(data) {
         console.log(data);
