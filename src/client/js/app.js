@@ -77,7 +77,7 @@ function daysToVac () {
     console.log(newDate);
     let vacDate = new Date(startDate);
     console.log('start date is: ', vacDate);
-    // let diffInTime = startDate.getTime() - newDate.getTime();
+    // let diffInTime = vacDate.getTime() - newDate.getTime();
     // let daysToVacation = diffInTime / (1000 * 3600 * 24)
     // return daysToVacation;
 }
