@@ -10,16 +10,16 @@ function performAction () {
     let city = document.getElementById('city').value;
     let mood = document.getElementById('feelings').value;
     let apiUrl = baseURL + city + apiKey;
-    getWeatherData(apiUrl)
+    getGeoNamesData(apiUrl)
     .then(function(data) {
         console.log(data);
-        postData('/addData', {date: newDate, temp: data.main.temp, mood: mood});
+        postData('/addData', {city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
     updateUI();
     });
 }
 
 /* Function to GET Web API Data*/
-const getWeatherData = async (apiUrl) =>{
+const getGeoNamesData = async (apiUrl) =>{
     const response = await fetch(apiUrl);
     try {
         const data = await response.json();
@@ -57,11 +57,12 @@ const updateUI = async () =>{
     try {
         const allData = await request.json();
         console.log(allData);
-        document.getElementById('date').innerHTML = `Date - ${allData.date}`;
-        document.getElementById('temp').innerHTML = `Tempurature - ${Math.round(Number(allData.temp))}&deg`;
-        document.getElementById('content').innerHTML = `Feeling - ${allData.mood}`;
-        document.getElementById('zip').value = '';
-        document.getElementById('feelings').value = '';
+        document.getElementById('destCity').innerHTML = `City:  ${allData.city}`;
+        document.getElementById('country').innerHTML = `Country:  ${allData.country}`;
+        document.getElementById('latitude').innerHTML = `Latitude:  ${allData.lat}`;
+        document.getElementById('longitude').innerHTML = `Longitude:  ${allData.lng}`;
+        document.getElementById('city').value = '';
+        // document.getElementById('feelings').value = '';
     }   catch (error) {
         console.log('error', error)
     }

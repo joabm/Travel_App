@@ -37,9 +37,10 @@ app.get('/all', callBack);
 function newData (req, res) {
     console.log(req.body);
     let newEntry = {
-        date: req.body.date,
-        temp: req.body.temp,
-        mood: req.body.mood
+        city: req.body.city,
+        country: req.body.country,
+        lat: req.body.lat,
+        lng: req.body.lng
     };
     Object.assign(projectData, newEntry);
 }
