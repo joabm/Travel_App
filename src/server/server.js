@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.static('dist'));
 
 // Setup Server
-const port = 3000;
+const port = 8080;
 const server = app.listen(port, listening);
 
 function listening () {

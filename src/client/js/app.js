@@ -8,7 +8,8 @@ const apiKey = '&maxRows=10&username=jdawg2021';
 /* Function called by event listener */
 function performAction () {
     let city = document.getElementById('city').value;
-    let mood = document.getElementById('feelings').value;
+    // let mood = document.getElementById('feelings').value;
+    daysToVac();
     let apiUrl = baseURL + city + apiKey;
     getGeoNamesData(apiUrl)
     .then(function(data) {
@@ -69,8 +70,17 @@ const updateUI = async () =>{
 }
 
 // Create a new date instance dynamically with JS
-let d = new Date();
-console.log(d);
-let newDate = (d.getMonth()+1)+'-'+ d.getDate()+'-'+ d.getFullYear();
+function daysToVac () {
+    let d = new Date();
+    console.log(d);
+    let newDate = (d.getMonth()+1)+'/'+ d.getDate()+'/'+ d.getFullYear();
+    console.log(newDate);
+    let vacDate = new Date(startDate);
+    console.log('start date is: ', vacDate);
+    // let diffInTime = startDate.getTime() - newDate.getTime();
+    // let daysToVacation = diffInTime / (1000 * 3600 * 24)
+    // return daysToVacation;
+}
+
 
 export {performAction}
