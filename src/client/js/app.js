@@ -69,17 +69,20 @@ const updateUI = async () =>{
     }
 }
 
-// Create a new date instance dynamically with JS
+// Calculate days until vacation
 function daysToVac () {
     let d = new Date();
-    console.log(d);
-    let newDate = (d.getMonth()+1)+'/'+ d.getDate()+'/'+ d.getFullYear();
-    console.log(newDate);
-    let vacDate = new Date(startDate);
-    console.log('start date is: ', vacDate);
-    // let diffInTime = vacDate.getTime() - newDate.getTime();
-    // let daysToVacation = diffInTime / (1000 * 3600 * 24)
-    // return daysToVacation;
+    console.log(`Today is : ${d}`);
+
+    let inputDate = document.getElementById('startDate').value;
+    let vacDate = new Date(inputDate);
+    console.log('Input date is: ', vacDate);
+
+    let diffInTime = vacDate.getTime() - d.getTime();
+    let daysToVacation = Math.round(diffInTime / (1000 * 3600 * 24));
+    console.log(`days to vacation:  ${daysToVacation}`);
+
+    return daysToVacation;
 }
 
 
