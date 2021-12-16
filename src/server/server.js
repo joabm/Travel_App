@@ -37,6 +37,7 @@ app.get('/all', callBack);
 function newData (req, res) {
     console.log(req.body);
     let newEntry = {
+        date: req.body.date,
         city: req.body.city,
         country: req.body.country,
         lat: req.body.lat,
