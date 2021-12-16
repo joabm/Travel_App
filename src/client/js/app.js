@@ -10,13 +10,15 @@ const weatherbitKey = '30a9f6f3f3ea4f5aae669490a3553361';
 /* Function called by event listener */
 function performAction () {
     let city = document.getElementById('city').value;
-    // let mood = document.getElementById('feelings').value;
-    daysToVac(daysToVacation);
+    let startDate = document.getElementById('startDate').value;
+    let daysToVacation = daysToVac(startDate);
+    console.log(daysToVacation);
+
     let apiUrl = baseURL + city + apiKey;
     getAPIData(apiUrl)
     .then(function(data) {
         console.log(data);
-        postData('/addData', {city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
+        postData('/addData', {date: startDate, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
     updateUI();
     });
 }
@@ -64,7 +66,7 @@ const updateUI = async () =>{
         document.getElementById('country').innerHTML = `Country:  ${allData.country}`;
         document.getElementById('latitude').innerHTML = `Latitude:  ${allData.lat}`;
         document.getElementById('longitude').innerHTML = `Longitude:  ${allData.lng}`;
-        document.getElementById('longitude').innerHTML = `Start Date:  ${allData.date}`;
+        document.getElementById('vacdate').innerHTML = `Vacation Start Date:  ${allData.date}`;
         document.getElementById('city').value = '';
         // document.getElementById('feelings').value = '';
     }   catch (error) {
@@ -72,13 +74,10 @@ const updateUI = async () =>{
     }
 }
 
-// Calculate days until vacations
-function daysToVac () {
+// Calculate days until vacation
+function daysToVac (startDate) {
     let d = new Date();
-
-    let startDate = document.getElementById('startDate').value;
     let inputDate = new Date(startDate);
-
     let diffInTime = inputDate.getTime() - d.getTime();
     let daysToVacation = (Math.round(diffInTime / (1000 * 3600 * 24)) + 1);
     console.log(`days to vacation:  ${daysToVacation}`);
