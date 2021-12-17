@@ -2,23 +2,20 @@
 const baseURL  = 'http://api.geonames.org/searchJSON?q=';
 const apiKey = '&maxRows=10&username=jdawg2021';
 
+const weatherbitURL = 'https://api.weatherbit.io/v2.0/normals?lat=35.5&lon=-75.5&start_day=02-02&end_day=03-01&tp=daily&key=API_KEY'
 const weatherbitKey = '30a9f6f3f3ea4f5aae669490a3553361';
 
-// Event listener to add function to existing HTML DOM element
-// document.getElementById('generate').addEventListener('click', performAction);
-
-/* Function called by event listener */
+/* Function exported and called by event listener */
 function performAction () {
     let city = document.getElementById('city').value;
-    let startDate = document.getElementById('startDate').value;
-    let daysToVacation = daysToVac(startDate);
-    console.log(daysToVacation);
+    let days = vacDays();
+    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.begin}, end: ${days.end}, daysTo: ${days.daysTo}`);
 
     let apiUrl = baseURL + city + apiKey;
     getAPIData(apiUrl)
     .then(function(data) {
         console.log(data);
-        postData('/addData', {date: startDate, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
+        postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
     updateUI();
     });
 }
@@ -68,22 +65,29 @@ const updateUI = async () =>{
         document.getElementById('longitude').innerHTML = `Longitude:  ${allData.lng}`;
         document.getElementById('vacdate').innerHTML = `Vacation Start Date:  ${allData.date}`;
         document.getElementById('city').value = '';
-        // document.getElementById('feelings').value = '';
     }   catch (error) {
         console.log('error', error)
     }
 }
 
-// Calculate days until vacation
-function daysToVac (startDate) {
+// create days object
+function vacDays () {
+    let startDate = document.getElementById('startDate').value;
+    let endDate = document.getElementById('endDate').value;
+
+    //calculate days until vacation
     let d = new Date();
     let inputDate = new Date(startDate);
     let diffInTime = inputDate.getTime() - d.getTime();
-    let daysToVacation = (Math.round(diffInTime / (1000 * 3600 * 24)) + 1);
-    console.log(`days to vacation:  ${daysToVacation}`);
+    let daysToVac = (Math.round(diffInTime / (1000 * 3600 * 24)) + 1);
 
-    return daysToVacation;
+    //begin, end and full dates
+    let begin = startDate.slice(5);
+    let end = endDate.slice(5);
+    let vacStart = begin + '-' + startDate.slice(0,4);
+    let vacEnd = end + '-' + endDate.slice(0,4);
+    
+    return {begin: begin, end: end, daysTo: daysToVac, start: vacStart, stop: vacEnd};
 }
-
 
 export {performAction}
