@@ -1,28 +1,32 @@
 /* Global Variables */
-const baseURL  = 'http://api.geonames.org/searchJSON?q=';
-const apiKey = '&maxRows=10&username=jdawg2021';
+const geoBase  = 'http://api.geonames.org/searchJSON?q=';
+const geoKey = '&maxRows=10&username=jdawg2021';
 
-const weatherbitURL = 'https://api.weatherbit.io/v2.0/normals?lat=35.5&lon=-75.5&start_day=02-02&end_day=03-01&tp=daily&key=API_KEY'
-const weatherbitKey = '30a9f6f3f3ea4f5aae669490a3553361';
+const weathbBase = 'https://api.weatherbit.io/v2.0/normals?'
+const weathbKey = '30a9f6f3f3ea4f5aae669490a3553361';
 
 /* Function exported and called by event listener */
 function performAction () {
     let city = document.getElementById('city').value;
     let days = vacDays();
-    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.begin}, end: ${days.end}, daysTo: ${days.daysTo}`);
+    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.beginDay}, end: ${days.endDay}, daysTo: ${days.daysTo}`);
 
-    let apiUrl = baseURL + city + apiKey;
-    getAPIData(apiUrl)
+    let geoURL = geoBase + city + geoKey;
+    getAPIData(geoURL)
     .then(function(data) {
         console.log(data);
+        let geoData = {startDate: days.start, endDate: days.stop, city: data.geonames[0].name, country: data.geonames[0].countryName,}
+        console.log(`geoData: ${geoData.city}`);
+        let weathbURL = weathbBase + `lat=${data.geonames[0].lat}` + `&lon=${data.geonames[0].lng}`+ `&start_day=${days.beginDay}` + `&end_day=${days.endDay}` + `&tp=daily&key=${weathbKey}`;
+        console.log(`weathbURL: ${weathbURL}`);
         postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
     updateUI();
     });
 }
 
 /* Function to GET Web API Data*/
-const getAPIData = async (apiUrl) =>{
-    const response = await fetch(apiUrl);
+const getAPIData = async (url = '') =>{
+    const response = await fetch(url);
     try {
         const data = await response.json();
         // console.log('data');
@@ -87,7 +91,7 @@ function vacDays () {
     let vacStart = begin + '-' + startDate.slice(0,4);
     let vacEnd = end + '-' + endDate.slice(0,4);
     
-    return {begin: begin, end: end, daysTo: daysToVac, start: vacStart, stop: vacEnd};
+    return {beginDay: begin, endDay: end, daysTo: daysToVac, start: vacStart, stop: vacEnd};
 }
 
 export {performAction}
