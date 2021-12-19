@@ -1,8 +1,8 @@
 /* Global Variables */
 const geoBase  = 'http://api.geonames.org/searchJSON?q=';
-const geoKey = '&maxRows=10&username=jdawg2021';
+const geoKey = '&maxRows=5&username=jdawg2021';
 
-const weathbBase = 'https://api.weatherbit.io/v2.0/normals?'
+const weathbBase = 'https://api.weatherbit.io/v2.0/current?';
 const weathbKey = '30a9f6f3f3ea4f5aae669490a3553361';
 
 /* Function exported and called by event listener */
@@ -11,16 +11,24 @@ function performAction () {
     let days = vacDays();
     console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.beginDay}, end: ${days.endDay}, daysTo: ${days.daysTo}`);
 
+    //get api data startging with geonames data
     let geoURL = geoBase + city + geoKey;
     getAPIData(geoURL)
     .then(function(data) {
         console.log(data);
         let geoData = {startDate: days.start, endDate: days.stop, city: data.geonames[0].name, country: data.geonames[0].countryName,}
-        console.log(`geoData: ${geoData.city}`);
-        let weathbURL = weathbBase + `lat=${data.geonames[0].lat}` + `&lon=${data.geonames[0].lng}`+ `&start_day=${days.beginDay}` + `&end_day=${days.endDay}` + `&tp=daily&key=${weathbKey}`;
+        console.log(geoData);
+        //get weatherbit data
+        let weathbURL = weathbBase + `lat=${data.geonames[0].lat}&lon=${data.geonames[0].lng}&key=${weathbKey}&units=I&include=minutely`;
         console.log(`weathbURL: ${weathbURL}`);
-        postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
-    updateUI();
+        getAPIData(weathbURL)
+        .then(function(data) {
+            console.log(data)
+            let weathBData = {relTemp: data.data[0].app_temp, aqi: data.data[0].aqi, clouds: data.data[0].clouds};
+            console.log(weathBData);
+        });
+        // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
+        // updateUI();
     });
 }
 
