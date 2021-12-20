@@ -19,7 +19,7 @@ function performAction () {
     getAPIData(geoURL)
     .then(function(data) {
         console.log(data);
-        let geoData = {startDate: days.start, endDate: days.stop, city: data.geonames[0].name, country: data.geonames[0].countryName,}
+        let geoData = {city: data.geonames[0].name, country: data.geonames[0].countryName,}
         console.log(geoData);
         //get weatherbit data
         let weathbURL = weathbBase + `lat=${data.geonames[0].lat}&lon=${data.geonames[0].lng}&key=${weathbKey}&units=I&include=minutely`;
@@ -35,8 +35,8 @@ function performAction () {
             .then(function(data) {
                 console.log(data);
             })
+            postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         });
-        // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         // updateUI();
     });
 }
