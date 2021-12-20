@@ -5,6 +5,9 @@ const geoKey = '&maxRows=5&username=jdawg2021';
 const weathbBase = 'https://api.weatherbit.io/v2.0/current?';
 const weathbKey = '30a9f6f3f3ea4f5aae669490a3553361';
 
+const pixbBase = "https://pixabay.com/api/?key=";
+const pixBKey = "24908452-d15071fe842fea1450b1b7ad3";
+
 /* Function exported and called by event listener */
 function performAction () {
     let city = document.getElementById('city').value;
@@ -26,6 +29,12 @@ function performAction () {
             console.log(data)
             let weathBData = {relTemp: data.data[0].app_temp, aqi: data.data[0].aqi, clouds: data.data[0].clouds};
             console.log(weathBData);
+            let pixbayURL = pixbBase +pixBKey+ `&q=${geoData.city}&image_type=photo`;
+            console.log(pixbayURL);
+            getAPIData(pixbayURL)
+            .then(function(data) {
+                console.log(data);
+            })
         });
         // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         // updateUI();
