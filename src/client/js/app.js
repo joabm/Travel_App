@@ -12,7 +12,7 @@ const pixBKey = "24908452-d15071fe842fea1450b1b7ad3";
 function performAction () {
     let city = document.getElementById('city').value;
     let days = vacDays();
-    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.beginDay}, end: ${days.endDay}, daysTo: ${days.daysTo}`);
+    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.beginDay}, end: ${days.endDay}, daysTo: ${days.daysTo}, length: ${days.length}`);
 
     //get api data startging with geonames data
     let geoURL = geoBase + city + geoKey;
@@ -102,13 +102,18 @@ function vacDays () {
     let diffInTime = inputDate.getTime() - d.getTime();
     let daysToVac = (Math.round(diffInTime / (1000 * 3600 * 24)) + 1);
 
+    //calculate length of vacation
+    let inputDate2 = new Date(endDate);
+    let diffInDays = inputDate2.getTime() - inputDate.getTime();
+    let vacLength = (Math.round(diffInDays / (1000 * 3600 * 24)));
+
     //begin, end and full dates
     let begin = startDate.slice(5);
     let end = endDate.slice(5);
     let vacStart = begin + '-' + startDate.slice(0,4);
     let vacEnd = end + '-' + endDate.slice(0,4);
     
-    return {beginDay: begin, endDay: end, daysTo: daysToVac, start: vacStart, stop: vacEnd};
+    return {beginDay: begin, endDay: end, daysTo: daysToVac, start: vacStart, stop: vacEnd, length: vacLength};
 }
 
 export {performAction}
