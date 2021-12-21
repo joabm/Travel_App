@@ -34,6 +34,11 @@ function performAction () {
             getAPIData(pixbayURL)
             .then(function(pData) {
                 console.log(pData);
+                if (pData.hits === null) {
+                    // post with url to default image
+                } else {
+                    //post with data from api
+                }
             })
             // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         });
