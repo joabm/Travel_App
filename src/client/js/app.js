@@ -17,25 +17,25 @@ function performAction () {
     //get api data startging with geonames data
     let geoURL = geoBase + city + geoKey;
     getAPIData(geoURL)
-    .then(function(data) {
-        console.log(data);
-        let geoData = {city: data.geonames[0].name, country: data.geonames[0].countryName,}
+    .then(function(gData) {
+        console.log(gData);
+        let geoData = {city: gData.geonames[0].name, country: gData.geonames[0].countryName};
         console.log(geoData);
         //get weatherbit data
-        let weathbURL = weathbBase + `lat=${data.geonames[0].lat}&lon=${data.geonames[0].lng}&key=${weathbKey}&units=I&include=minutely`;
+        let weathbURL = weathbBase + `lat=${gData.geonames[0].lat}&lon=${gData.geonames[0].lng}&key=${weathbKey}&units=I&include=minutely`;
         console.log(`weathbURL: ${weathbURL}`);
         getAPIData(weathbURL)
-        .then(function(data) {
-            console.log(data)
-            let weathBData = {relTemp: data.data[0].app_temp, aqi: data.data[0].aqi, clouds: data.data[0].clouds};
+        .then(function(wData) {
+            console.log(wData)
+            let weathBData = {relTemp: wData.data[0].app_temp, aqi: wData.data[0].aqi, clouds: wData.data[0].clouds};
             console.log(weathBData);
-            let pixbayURL = pixbBase +pixBKey+ `&q=${geoData.city}&image_type=photo`;
+            let pixbayURL = pixbBase +pixBKey+ `&q=${gData.geonames[0].name}&image_type=photo`;
             console.log(pixbayURL);
             getAPIData(pixbayURL)
-            .then(function(data) {
-                console.log(data);
+            .then(function(pData) {
+                console.log(pData);
             })
-            postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
+            // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         });
         // updateUI();
     });
