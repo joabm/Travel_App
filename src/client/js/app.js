@@ -29,18 +29,19 @@ function performAction () {
             console.log(wData)
             let weathBData = {relTemp: wData.data[0].app_temp, aqi: wData.data[0].aqi, clouds: wData.data[0].clouds};
             console.log(weathBData);
-            let pixbayURL = pixbBase +pixBKey+ `&q=${gData.geonames[0].name}&image_type=photo`;
+            let pixbayURL = pixbBase +pixBKey+ `&q=${gData.geonames[0].name}+skyline&image_type=photo`;
             console.log(pixbayURL);
             getAPIData(pixbayURL)
             .then(function(pData) {
                 console.log(pData);
                 if (pData.hits === null) {
                     // post with url to default image
+                    postData('/addData', {days, geoData, weathBData, photo: "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg"});
                 } else {
                     //post with data from api
+                    postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
                 }
             })
-            // postData('/addData', {date: days.start, city: data.geonames[0].name, country: data.geonames[0].countryName, lat: data.geonames[0].lat, lng: data.geonames[0].lng});
         });
         // updateUI();
     });
