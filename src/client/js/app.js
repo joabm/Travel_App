@@ -34,9 +34,10 @@ function performAction () {
             getAPIData(pixbayURL)
             .then(function(pData) {
                 console.log(pData);
-                if (pData.hits === null) {
+                if (pData.totalHits === 0) {
                     // post with url to default image
-                    postData('/addData', {days, geoData, weathBData, photo: "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg"});
+                    let defaultPhoto = {photo: "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg"};
+                    postData('/addData', {days, geoData, weathBData, defaultPhoto});
                 } else {
                     //post with data from api
                     postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
