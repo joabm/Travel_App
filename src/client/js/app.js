@@ -31,8 +31,8 @@ function performAction () {
             .then(function(pData) {
                 if (pData.totalHits === 0) {
                     // post data to the server with default picture
-                    let defaultPhoto = {photo: "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg"};
-                    postData('/addData', {days, geoData, weathBData, defaultPhoto});
+                    let photo = "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg";
+                    postData('/addData', {days, geoData, weathBData, photo});
                 } else {
                     // post data to the server
                     postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
