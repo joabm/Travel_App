@@ -12,34 +12,29 @@ const pixBKey = "24908452-d15071fe842fea1450b1b7ad3";
 function performAction () {
     let city = document.getElementById('city').value;
     let days = vacDays();
-    console.log(`start: ${days.start}, stop: ${days.stop}, begin: ${days.beginDay}, end: ${days.endDay}, daysTo: ${days.daysTo}, length: ${days.length}`);
 
-    //get api data startging with geonames data
+    // get geonames API data
     let geoURL = geoBase + city + geoKey;
     getAPIData(geoURL)
     .then(function(gData) {
-        console.log(gData);
         let geoData = {city: gData.geonames[0].name, country: gData.geonames[0].countryName};
-        console.log(geoData);
-        //get weatherbit data
+        
+        // get weatherbit API data
         let weathbURL = weathbBase + `lat=${gData.geonames[0].lat}&lon=${gData.geonames[0].lng}&key=${weathbKey}&units=I&include=minutely`;
-        console.log(`weathbURL: ${weathbURL}`);
         getAPIData(weathbURL)
         .then(function(wData) {
-            console.log(wData)
             let weathBData = {relTemp: wData.data[0].app_temp, aqi: wData.data[0].aqi, clouds: wData.data[0].clouds};
-            console.log(weathBData);
+            
+            // get pixelBay API data
             let pixbayURL = pixbBase +pixBKey+ `&q=${gData.geonames[0].name}+skyline&image_type=photo`;
-            console.log(pixbayURL);
             getAPIData(pixbayURL)
             .then(function(pData) {
-                console.log(pData);
                 if (pData.totalHits === 0) {
-                    // post with url to default image
+                    // post data to the server with default picture
                     let defaultPhoto = {photo: "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_1280.jpg"};
                     postData('/addData', {days, geoData, weathBData, defaultPhoto});
                 } else {
-                    //post with data from api
+                    // post data to the server
                     postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
                 }
             })
@@ -48,7 +43,7 @@ function performAction () {
     });
 }
 
-/* Function to GET Web API Data*/
+// GET Web API Data
 const getAPIData = async (url = '') =>{
     const response = await fetch(url);
     try {
@@ -60,7 +55,7 @@ const getAPIData = async (url = '') =>{
     }
 }
 
-/* Function to POST data to server*/
+// POST data to server
 const postData = async (url = '', data = {})=>{
     console.log(data)
     const response = await fetch(url, {
@@ -80,7 +75,7 @@ const postData = async (url = '', data = {})=>{
       }
   }
 
-/* Function to GET Project Data and update the UI.  Also clears the input fields*/
+// GET Project Data and update the UI.  Also clears the input fields
 
 const updateUI = async () =>{
     const request = await fetch('/all');
