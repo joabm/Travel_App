@@ -8,7 +8,7 @@ body{
     display: grid;
     grid-auto-rows: minmax(50px, auto);
     justify-content: center;
-    grid-gap: 4px;
+    grid-gap: 5px;
 }
 
 .holder{
@@ -38,11 +38,6 @@ body{
     justify-content: center;
     flex-direction: column;
 }
-
-// #date, #temp, #content {
-//     margin: 3px;
-//     padding: 5px;
-// }
 
 .headline {
     margin-top: 10px;
@@ -91,16 +86,6 @@ button:hover {
     color: #3b4a6b;
 }
 
-// textarea{
-//     width: 80vw;
-//     background:#22b2da;
-//     color: #f0d43a;
-//     font-size: 20px;
-//     font-family: 'Oswald', sans-serif;
-//     border-radius: 8px;
-//     margin: 10px;
-// }
-
 .footer {
     height: 5vh;
     font-size: 1em;
@@ -110,13 +95,6 @@ button:hover {
     margin-bottom: 10px;
 }
 
-/* Reset style for HTML element on active to have no border*/
-// input:focus,
-// select:focus,
-// textarea:focus,
-// button:focus {
-//     outline: none;
-// }
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
     // color: #f0d43a; 
