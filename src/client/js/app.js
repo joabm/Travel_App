@@ -82,12 +82,14 @@ const updateUI = async () =>{
     try {
         const allData = await request.json();
         console.log(allData);
-        document.getElementById('destCity').innerHTML = `City:  ${allData.city}`;
-        document.getElementById('country').innerHTML = `Country:  ${allData.country}`;
-        document.getElementById('latitude').innerHTML = `Latitude:  ${allData.lat}`;
-        document.getElementById('longitude').innerHTML = `Longitude:  ${allData.lng}`;
-        document.getElementById('vacdate').innerHTML = `Vacation Start Date:  ${allData.date}`;
+        document.getElementById('location').innerHTML = `Location:  ${allData.city}`;
+        document.getElementById('dates').innerHTML = `Country:  ${allData.country}`;
+        document.getElementById('daysuntil').innerHTML = `Country:  ${allData.country}`;
+        document.getElementById('weather').innerHTML = `Latitude:  ${allData.lat}`;
+        document.getElementById('photo').innerHTML = `Longitude:  ${allData.lng}`;
         document.getElementById('city').value = '';
+        document.getElementById('startdate').value = '';
+        document.getElementById('enddate').value = '';
     }   catch (error) {
         console.log('error', error)
     }
