@@ -38,9 +38,11 @@ function performAction () {
                     postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
                 }
             })
+            // updateUI();
         });
         // updateUI();
     });
+    // updateUI();
 }
 
 // GET Web API Data
@@ -82,11 +84,11 @@ const updateUI = async () =>{
     try {
         const allData = await request.json();
         console.log(allData);
-        document.getElementById('location').innerHTML = `Location:  ${allData.city}`;
-        document.getElementById('dates').innerHTML = `Country:  ${allData.country}`;
-        document.getElementById('daysuntil').innerHTML = `Country:  ${allData.country}`;
-        document.getElementById('weather').innerHTML = `Latitude:  ${allData.lat}`;
-        document.getElementById('photo').innerHTML = `Longitude:  ${allData.lng}`;
+        document.getElementById('location').innerHTML = `Location:  ${allData.geoData.city}, ${allData.geoData.country}`;
+        document.getElementById('dates').innerHTML = `Vacation Dates: ${allData.days.start} to ${allData.days.stop}`;
+        document.getElementById('daysuntil').innerHTML = `There are ${allData.days.daysTo} days until your ${allData.days.length} day vacation!`;
+        document.getElementById('weather').innerHTML = `Current it feels like ${allData.weathBdata.relTemp} with an AQI of ${all.weathBData.aqi} and ${allData.weathBData.clouds}% cloudy.`;
+        document.getElementById('photo').innerHTML = `<a href="${allData.photo}">location photo</a>`;
         document.getElementById('city').value = '';
         document.getElementById('startdate').value = '';
         document.getElementById('enddate').value = '';
