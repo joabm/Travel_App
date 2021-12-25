@@ -42,7 +42,6 @@ function newData (req, res) {
         weathBData: req.body.weathBData,
         photo: req.body.photo
     };
-    console.log('new entry: ', newEntry);
     Object.assign(projectData, newEntry);
 }
 
