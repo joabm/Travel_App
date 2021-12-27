@@ -3,38 +3,6 @@ body{
     height: 100vh;
 }
 
-#app{
-    margin: 5px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 150px 1fr 1fr 50px;
-    grid-gap: 5px;
-    grid-template-areas:
-    "hd"
-    "in"
-    "in"
-    "en"
-    "en"
-    "ft";
-}
-
-/* defines grid areas */
-.headline {
-    grid-area: hd;
-}
-
-.input {
-    grid-area: in;
-}
-
-.entry {
-    grid-area: en;
-}
-
-.footer {
-    grid-area: ft;
-}
-
 .holder{
     display: flex;
     flex-wrap: wrap;
@@ -43,22 +11,9 @@ body{
     flex-direction: column;
     font-family: 'Oswald', sans-serif;
     width: 95vw;
-    font-size: 2em;
+    font-size: 1.5em;
     background-color: rgb(214, 224, 238);
-    border-radius: 10px;
-}
-
-.entry{
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    flex-direction: column;
-}
-
-#entryHolder{
-    font-size: 25px;
-    margin:5px;
+    border-radius: 5px;
 }
 
 .headline {
@@ -66,13 +21,22 @@ body{
     font-size: 3em;
 }
 
+.photo, input, .details {
+    text-align: center;
+    // display: flex;
+    // justify-content: center;
+}
+
+#detailHolder{
+    font-size: 25px;
+    margin:5px;
+}
+
 .title {
     color: rgb(116, 2, 2);
 }
 
-/*  Basic Styling To Override Default For Basic HTML Elements */
 label{
-    font-size: 1em;
     text-align: center;
 }
 
@@ -131,17 +95,78 @@ figcaption {
 ::placeholder { /* Firefox, Chrome, Opera */ 
     // color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
-
 } 
   
 :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
     // color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
-
 } 
   
 ::-ms-input-placeholder { /* Microsoft Edge */ 
     // color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
+}
 
+.container{
+    margin: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 1fr 1fr 1fr 1fr 50px;
+    grid-gap: 5px;
+    grid-template-areas:
+    "hd"
+    "in"
+    "in"
+    "in"
+    "en"
+    "en"
+    "ph"
+    "ft";
+}
+
+/* defines grid areas */
+.headline {
+    grid-area: hd;
+}
+
+.input {
+    grid-area: in;
+}
+
+.details {
+    grid-area: en;
+}
+
+.footer {
+    grid-area: ft;
+}
+
+.photo {
+    grid-area: ph
+}
+
+@media(min-width: 1024px) {
+    .container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 200px 1fr 1fr 75px;
+        grid-template-areas: 
+        "hd hd"
+        "in in"
+        "in in"
+        "in in"
+        "en ph"
+        "en ph"
+        "ft ft";
+    }
+    .input {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    button {
+        width: 20vw;
+    }
+    
 }
