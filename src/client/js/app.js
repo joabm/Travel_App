@@ -86,7 +86,7 @@ const updateUI = async () =>{
         document.getElementById('dates').innerHTML = `Dates: ${allData.days.start} to ${allData.days.stop}`;
         document.getElementById('daysuntil').innerHTML = `There are ${allData.days.daysTo} days left until your ${allData.days.length} day vacation!`;
         document.getElementById('weather').innerHTML = `Currently in ${allData.geoData.city}, it feels like ${Math.round(Number(allData.weathBData.relTemp))}&deg. The AQI is ${allData.weathBData.aqi} and it is ${allData.weathBData.clouds}% cloudy.`;
-        document.getElementById('photo').innerHTML = `<img src="${allData.photo}" alt = "location photo" />`;
+        document.getElementById('photo').innerHTML = `<figure><img src="${allData.photo}" alt = "location photo" /><figcaption>Photos provided by <a href="https://pixabay.com/">Pixabay</a></figcaption></figure>`;
         document.getElementById('city').value = '';
         document.getElementById('startDate').value = '';
         document.getElementById('endDate').value = '';
