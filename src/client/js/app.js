@@ -83,7 +83,7 @@ const updateUI = async () =>{
         const allData = await request.json();
         console.log('allData: ', allData);
         document.getElementById('location').innerHTML = `Location:  ${allData.geoData.city}, ${allData.geoData.country}`;
-        document.getElementById('dates').innerHTML = `Vacation Dates: ${allData.days.start} to ${allData.days.stop}`;
+        document.getElementById('dates').innerHTML = `Dates: ${allData.days.start} to ${allData.days.stop}`;
         document.getElementById('daysuntil').innerHTML = `There are ${allData.days.daysTo} days left until your ${allData.days.length} day vacation!`;
         document.getElementById('weather').innerHTML = `Currently in ${allData.geoData.city}, it feels like ${Math.round(Number(allData.weathBData.relTemp))}&deg. The AQI is ${allData.weathBData.aqi} and it is ${allData.weathBData.clouds}% cloudy.`;
         document.getElementById('photo').innerHTML = `<img src="${allData.photo}" alt = "location photo" />`;
