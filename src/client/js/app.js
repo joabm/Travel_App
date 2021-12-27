@@ -37,12 +37,10 @@ function performAction () {
                     // post data to the server
                     postData('/addData', {days, geoData, weathBData, photo: pData.hits[0].webformatURL});
                 }
+                updateUI();
             })
-            // updateUI();
         });
-        // updateUI();
     });
-    // updateUI();
 }
 
 // GET Web API Data
@@ -83,15 +81,15 @@ const updateUI = async () =>{
     const request = await fetch('/all');
     try {
         const allData = await request.json();
-        console.log(allData);
+        console.log('allData: ', allData);
         document.getElementById('location').innerHTML = `Location:  ${allData.geoData.city}, ${allData.geoData.country}`;
         document.getElementById('dates').innerHTML = `Vacation Dates: ${allData.days.start} to ${allData.days.stop}`;
-        document.getElementById('daysuntil').innerHTML = `There are ${allData.days.daysTo} days until your ${allData.days.length} day vacation!`;
-        document.getElementById('weather').innerHTML = `Current it feels like ${allData.weathBdata.relTemp} with an AQI of ${all.weathBData.aqi} and ${allData.weathBData.clouds}% cloudy.`;
-        document.getElementById('photo').innerHTML = `<a href="${allData.photo}">location photo</a>`;
+        document.getElementById('daysuntil').innerHTML = `There are ${allData.days.daysTo} days left until your ${allData.days.length} day vacation!`;
+        document.getElementById('weather').innerHTML = `Currently in ${allData.geoData.city}, it feels like ${Math.round(Number(allData.weathBData.relTemp))}&deg. The AQI is ${allData.weathBData.aqi} and it is ${allData.weathBData.clouds}% cloudy.`;
+        document.getElementById('photo').innerHTML = `<img src="${allData.photo}" alt = "location photo" />`;
         document.getElementById('city').value = '';
-        document.getElementById('startdate').value = '';
-        document.getElementById('enddate').value = '';
+        document.getElementById('startDate').value = '';
+        document.getElementById('endDate').value = '';
     }   catch (error) {
         console.log('error', error)
     }
