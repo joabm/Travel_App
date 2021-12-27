@@ -21,10 +21,8 @@ body{
     font-size: 3em;
 }
 
-.photo, input, .details {
+.photo, .input, .details {
     text-align: center;
-    // display: flex;
-    // justify-content: center;
 }
 
 #detailHolder{
@@ -111,15 +109,13 @@ figcaption {
     margin: 5px;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 150px 1fr 1fr 1fr 1fr 50px;
+    grid-template-rows: 150px 1fr 50px;
     grid-gap: 5px;
     grid-template-areas:
     "hd"
     "in"
-    "in"
-    "in"
-    "en"
-    "en"
+    "dt"
+    "dt"
     "ph"
     "ft";
 }
@@ -134,7 +130,7 @@ figcaption {
 }
 
 .details {
-    grid-area: en;
+    grid-area: dt;
 }
 
 .footer {
@@ -149,16 +145,14 @@ figcaption {
     .container {
         margin: 20px;
         display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: 200px 1fr 1fr 75px;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 200px 1fr 1fr 1fr 1fr 75px;
         grid-template-areas: 
-        "hd hd"
-        "in in"
-        "in in"
-        "in in"
-        "en ph"
-        "en ph"
-        "ft ft";
+        "hd hd hd hd hd hd"
+        "in in in in in in"
+        "dt dt dt ph ph ph"
+        "dt dt dt ph ph ph"
+        "ft ft ft ft ft ft";
     }
     .input {
         display: flex;
