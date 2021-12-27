@@ -1,49 +1,68 @@
 body{
-    // background: #66ccff;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     height: 100vh;
 }
 
 #app{
+    margin: 5px;
     display: grid;
-    grid-auto-rows: minmax(50px, auto);
-    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 1fr 1fr 50px;
     grid-gap: 5px;
+    grid-template-areas:
+    "hd"
+    "in"
+    "in"
+    "en"
+    "en"
+    "ft";
+}
+
+/* defines grid areas */
+.headline {
+    grid-area: hd;
+}
+
+.input {
+    grid-area: in;
+}
+
+.entry {
+    grid-area: en;
+}
+
+.footer {
+    grid-area: ft;
 }
 
 .holder{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     font-family: 'Oswald', sans-serif;
+    width: 95vw;
     font-size: 2em;
     background-color: rgb(214, 224, 238);
-    // background: radial-gradient(circle, #f7ee73, #7a47ad);
-    // box-shadow: 8px 5px 5px rgb(141, 138, 138);
     border-radius: 10px;
 }
 
 .entry{
-    // background: rgba(59, 74, 107, .3);
+    text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
     flex-direction: column;
 }
 
 #entryHolder{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    font-size: 1em;
 }
 
 .headline {
     margin-top: 10px;
     font-size: 3em;
-    text-align: center;
-    padding: 10px;
 }
 
 .title {
@@ -58,8 +77,6 @@ label{
 
 input{
     height: 5vh;
-    // background:#22b2da;
-    // color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
     text-align: center;
@@ -69,7 +86,7 @@ input{
 }
 
 button{
-    width: 80vw;
+    width: 50vw;
     height: 8vh;
     background: #3b4a6b;
     color: #f0d43a;
@@ -86,12 +103,26 @@ button:hover {
     color: #3b4a6b;
 }
 
+figure {
+    margin: 10px;
+}
+
+img {
+    max-width: 92%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px #444;
+}
+
+figcaption {
+    font-size: small;
+}
+
 .footer {
     height: 5vh;
     font-size: 1em;
     border-radius: 5px;
     background-color: rgb(214, 224, 238);
-    // box-shadow: 10px 5px 5px rgb(141, 138, 138);
     margin-bottom: 10px;
 }
 
