@@ -10,7 +10,7 @@ body{
     justify-content: center;
     flex-direction: column;
     font-family: 'Oswald', sans-serif;
-    width: 95vw;
+    width: 96vw;
     font-size: 1.5em;
     background-color: rgb(214, 224, 238);
     border-radius: 5px;
@@ -110,7 +110,7 @@ figcaption {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 150px 1fr 50px;
-    grid-gap: 5px;
+    row-gap: 5px;
     grid-template-areas:
     "hd"
     "in"
@@ -145,20 +145,19 @@ figcaption {
     .container {
         margin: 20px;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: 200px 1fr 1fr 1fr 1fr 75px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 1fr 1fr 75px;
         grid-template-areas: 
-        "hd hd hd hd hd hd"
-        "in in in in in in"
-        "dt dt dt ph ph ph"
-        "dt dt dt ph ph ph"
-        "ft ft ft ft ft ft";
+        "hd hd"
+        "in in"
+        "dt ph"
+        "ft ft";
     }
-    .input {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
+    
+    .details, .photo {
+        width: 48vw;
     }
+
     button {
         width: 20vw;
     }
