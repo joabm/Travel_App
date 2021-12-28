@@ -120,4 +120,4 @@ function vacDays () {
     return {beginDay: begin, endDay: end, daysTo: daysToVac, start: vacStart, stop: vacEnd, length: vacLength};
 }
 
-export {performAction}
+export {performAction, vacDays}

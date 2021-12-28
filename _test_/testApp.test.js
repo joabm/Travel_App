@@ -1,7 +1,8 @@
-import { performAction } from "../src/client/js/app"
+import "regenerator-runtime/runtime";
+import { vacDays } from "../src/client/js/app";
 
-describe("Testing the submit functionality", () => {
-    test("Testing the handleSubmit() function", () => {
+describe("Testing the days function truthiness", () => {
+    test("Testing the vacDays() function", () => {
 
-           expect(performAction).toBeDefined();
+           expect(vacDays).toBeDefined();
 })});
