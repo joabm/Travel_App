@@ -114,9 +114,9 @@ figcaption {
     grid-template-areas:
     "hd"
     "in"
-    "dt"
-    "dt"
     "ph"
+    "ph"
+    "dt"
     "ft";
 }
 
@@ -145,16 +145,16 @@ figcaption {
     .container {
         margin: 20px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 200px 1fr 1fr 75px;
         grid-template-areas: 
-        "hd hd"
-        "in in"
-        "dt ph"
-        "ft ft";
+        "hd hd hd hd"
+        "in in ph ph"
+        "dt dt dt dt"
+        "ft ft ft ft";
     }
     
-    .details, .photo {
+    .input, .photo {
         width: 48vw;
     }
 
