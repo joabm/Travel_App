@@ -1,5 +1,5 @@
 // import app from server.js
-const app = require ('./server');
+const app = require ('./server.js');
 
 // Setup Server
 const port = 8080;
