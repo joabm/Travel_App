@@ -18,14 +18,6 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('dist'));
 
-// Setup Server
-const port = 8080;
-const server = app.listen(port, listening);
-
-function listening () {
-    console.log(`running on localhost: ${port}`);
-}
-
 // GET route with callback function to respond with the endpoint data.
 function callBack (req, res) {
     res.send(projectData);
@@ -47,4 +39,4 @@ function newData (req, res) {
 
 app.post('/addData', newData);
 
-export {callBack};
+module.exports = app;
