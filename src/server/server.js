@@ -40,3 +40,4 @@ function newData (req, res) {
 app.post('/addData', newData);
 
 module.exports = app;
+module.exports.callBack = callBack;
