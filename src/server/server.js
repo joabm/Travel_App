@@ -39,5 +39,6 @@ function newData (req, res) {
 
 app.post('/addData', newData);
 
+//export app for server start.js and callBack for jest
 module.exports = app;
 module.exports.callBack = callBack;
